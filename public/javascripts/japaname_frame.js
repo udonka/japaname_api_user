@@ -1,7 +1,7 @@
-(function(wind, japanameFrameId){
+(function(wind){ 
   var JapanameObject = wind.JapanameObject = {};
   var japanameFrame = null;
-  var japanamaFrameId = null;
+  var japanameFrameId = null;
 
   JapanameObject.onNameChange = function(fn){
     if(typeof fn === "function"){
@@ -10,7 +10,7 @@
   }
 
   JapanameObject.setJapanameFrameId = function(id){
-    japanamaFrameId = id;
+    japanameFrameId = id;
   }
 
   wind.addEventListener("message",function(message){
@@ -22,11 +22,11 @@
       break;
     case "window_height":
       if(japanameFrameId){
-        japanameFrame = document.getElementById(japanamaFrameId);
+        japanameFrame = document.getElementById(japanameFrameId);
         japanameFrame.height = message.data.height;
       }
       break;
     }
   },false);
-}(window, "japanameIframe"));
+}(window));
 
