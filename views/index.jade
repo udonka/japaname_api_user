@@ -1,8 +1,11 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1 Crafti用 Japaname iframe使用方法
+  h2 デモ
+  p デモの下に、導入方法の解説がございます。
+  p このページのソースコード含め、ご参考にしてください。
+
 
   div#kanji_name ここにくるよ
 
@@ -11,11 +14,7 @@ block content
     input#original_name_input(type="text" name="original_name")
     input(type="submit" value="change name")
 
-  p out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. 
-
   iframe#japanameIframe(src="http://japaname.jp/names/api/frederic")
-
-  p out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. 
 
   //このスクリプトはどこに置いても大丈夫です。
   script(src='/javascripts/japaname_frame.js')
@@ -32,6 +31,74 @@ block content
 
     JapanameObject.setJapanameFrameId("japanameIframe");
     JapanameObject.onNameChange(function(name_obj){
+      console.log(JSON.stringify(name_obj));
+
       var kanji_div = document.getElementById("kanji_name");
       kanji_div.innerText = name_obj.kanji_string;
     });
+
+
+  h2 導入方法
+  ul
+    li japaname_frame.cssの読み込み
+    li iframe要素を記述
+    li japaname_frame.jsの読み込み
+    li JapanameObjectの設定
+
+  h3 japaname_frame.cssの読み込み
+  p iframeについての最低限のスタイリングを指定しているcssファイルです。
+    a(href="/stylesheets/japaname_frame.css") こちらのファイル
+    | をダウンロードし、活用ください。<br>なお、このサーバーはcraftiへの組み込み作業が終わり次第終了しますので直リンクでの使用はお控えください。
+
+  h3 iframe要素を記述
+  p のちにJapanameObjectに設定するために、idを指定してください。
+
+  h3 japaname_frame.jsの読み込み
+  p iframeからのデータを受け取るためのJavascriptです。
+    a(href="/javascripts/japaname_frame.js") こちらのファイル
+    | をダウンロードし、活用ください。
+
+  h3 JapanameObjectの設定
+  p japaname_frame.jsは、グローバルにJapanameObjectというオブジェクトを定義します。
+  p これは、以下の二つのメソッドを持ちます。
+
+  ul
+    li 
+      strong setJapanameFrameId(iframe_id)
+      br
+      | iframeのIDを指定します。第一引数にiframeのidを入れてください
+    li 
+      strong onNameChange(onchangeFunc)
+      br
+      | iframe内で選択された文字に変更が起こった場合に、指定された関数を実行します。
+      p なお、onchangeFunc実行時に、第一引数に渡されるオブジェクトは次のような構造をしています。
+
+      pre.
+        {
+          "kanji_string":"普令出陸",
+          "kanji_array": [
+            {
+              "kanji":"普",
+              "kana":"ふ",
+              "romaji":"fu ",
+              "meanings":["spread"]
+            },{
+              "kanji":"令",
+              "kana":"れ",
+              "romaji":"re ",
+              "meanings":["order"]
+            }, {
+              "kanji":"出",
+              "kana":"で",
+              "romaji":"de ",
+              "meanings":["out"]
+            }, {
+              "kanji":"陸",
+              "kana":"りく",
+              "romaji":"ri ku ",
+              "meanings":["land"]
+            }
+          ]
+        }
+
+
