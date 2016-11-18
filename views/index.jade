@@ -1,0 +1,37 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+  div#kanji_name ここにくるよ
+
+
+  form#original_name_form
+    input#original_name_input(type="text" name="original_name")
+    input(type="submit" value="change name")
+
+  p out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. 
+
+  iframe#japanameIframe(src="http://japaname.jp/names/api/frederic")
+
+  p out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. out of iframe. 
+
+  //このスクリプトはどこに置いても大丈夫です。
+  script(src='/javascripts/japaname_frame.js')
+  script.
+
+    var originalNameForm = document.getElementById("original_name_form");
+    originalNameForm.onsubmit = function (){
+      var originalNameInput = document.getElementById("original_name_input");
+
+      japanameIframe.src = "http://japaname.jp/names/api/" + originalNameInput.value;
+
+      return false;
+    }
+
+    JapanameObject.setJapanameFrameId("japanameIframe");
+    JapanameObject.onNameChange(function(name_obj){
+      var kanji_div = document.getElementById("kanji_name");
+      kanji_div.innerText = name_obj.kanji_string;
+    });
