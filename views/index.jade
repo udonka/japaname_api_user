@@ -1,37 +1,50 @@
 extends layout
 
 block content
-  h1 Crafti用 Japaname iframe使用方法
-  h2 デモ
-  p デモの下に、導入方法の解説がございます。
-  p このページのソースコード含め、ご参考にしてください。
+  h2 DEMO
 
 
   div#kanji_name ここにくるよ
+
+  div
+    button#saveButton Save
+    button#customButton Custom
 
 
   form#original_name_form
     input#original_name_input(type="text" name="original_name")
     input(type="submit" value="change name")
 
-  iframe#japanameIframe(src="http://japaname.jp/names/api/frederic")
+  iframe#japanameIframe(style="display:none")
 
   //このスクリプトはどこに置いても大丈夫です。
   script(src='http://japaname.jp/api/crafti/japaname_frame.js')
   script.
-
+    //名前が変更されたときの処理例
     var originalNameForm = document.getElementById("original_name_form");
     originalNameForm.onsubmit = function (){
       var originalNameInput = document.getElementById("original_name_input");
 
-      alert("changing src");
-      japanameIframe.src = "http://japaname.jp/names/api/" + originalNameInput.value;
-      alert("changed src");
+      JapanameObject.changeName(originalNameInput.value);
 
       return false;
     }
 
+    //custom ボタンが押されたときの処理の例
+    var customButton = document.getElementById("customButton");
+    customButton.onclick = function(){
+      console.log("custom");
+      
+      var japanameIframe = document.getElementById("japanameIframe");
+      japanameIframe.style.display = "inline-block";
+    }
+
+
+    //JapanameObjectに、iframeのIDを教える。
     JapanameObject.setJapanameFrameId("japanameIframe");
+
+    //iframeの中身で、名前が変更されたときの挙動を設定する。
+    //ここでは、div要素のテキストとして設定している。
     JapanameObject.onNameChange(function(name_obj){
       console.log(JSON.stringify(name_obj));
 
@@ -40,6 +53,7 @@ block content
     });
 
 
+  h1 Crafti用 Japaname iframe使用方法
   h2 導入方法
   ul
     li japaname_frame.cssの読み込み
@@ -74,13 +88,18 @@ block content
 
   h3 JapanameObjectの設定
   p japaname_frame.jsは、グローバルにJapanameObjectというオブジェクトを定義します。
-  p これは、以下の二つのメソッドを持ちます。
+  p これは、以下の3つのメソッドを持ちます。
 
   ul
     li 
       strong setJapanameFrameId(iframe_id)
       br
       | iframeのIDを指定します。第一引数にiframeのidを入れてください
+    li 
+      strong changeName(name)
+      p 名前を変更するために、iframeのURLをセットします。
+      
+
     li 
       strong onNameChange(onchangeFunc)
       br
