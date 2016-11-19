@@ -24,7 +24,9 @@ block content
     originalNameForm.onsubmit = function (){
       var originalNameInput = document.getElementById("original_name_input");
 
+      alert("changing src");
       japanameIframe.src = "http://japaname.jp/names/api/" + originalNameInput.value;
+      alert("changed src");
 
       return false;
     }
