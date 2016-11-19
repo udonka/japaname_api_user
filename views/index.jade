@@ -17,7 +17,7 @@ block content
   iframe#japanameIframe(src="http://japaname.jp/names/api/frederic")
 
   //このスクリプトはどこに置いても大丈夫です。
-  script(src='/javascripts/japaname_frame.js')
+  script(src='http://japaname.jp/api/crafti/japaname_frame.js')
   script.
 
     var originalNameForm = document.getElementById("original_name_form");
@@ -46,17 +46,29 @@ block content
     li JapanameObjectの設定
 
   h3 japaname_frame.cssの読み込み
-  p iframeについての最低限のスタイリングを指定しているcssファイルです。
-    a(href="/stylesheets/japaname_frame.css") こちらのファイル
-    | をダウンロードし、活用ください。<br>なお、このサーバーはcraftiへの組み込み作業が終わり次第終了しますので直リンクでの使用はお控えください。
+  p 
+    del 
+      |iframeについての最低限のスタイリングを指定しているcssファイルです。
+      a(href="/stylesheets/japaname_frame.css") こちらのファイル
+      | をダウンロードし、活用ください。<br>なお、このサーバーはcraftiへの組み込み作業が終わり次第終了しますので直リンクでの使用はお控えください。
+
+  p
+    ins 更新があった場合に適用するため、
+      a(href="http://japaname.jp/api/crafti/japaname_frame.css") http://japaname.jp/api/crafti/japaname_frame.css
+      | へ直リンクしてしまってください。
 
   h3 iframe要素を記述
   p のちにJapanameObjectに設定するために、idを指定してください。
 
   h3 japaname_frame.jsの読み込み
-  p iframeからのデータを受け取るためのJavascriptです。
-    a(href="/javascripts/japaname_frame.js") こちらのファイル
-    | をダウンロードし、活用ください。
+  p 
+    del iframeからのデータを受け取るためのJavascriptです。
+      a(href="/javascripts/japaname_frame.js") こちらのファイル
+      | をダウンロードし、活用ください。
+  p
+    ins 更新があった場合に適用するため、
+      a(href="http://japaname.jp/api/crafti/japaname_frame.js") http://japaname.jp/api/crafti/japaname_frame.js
+      | へ直リンクしてしまってください。
 
   h3 JapanameObjectの設定
   p japaname_frame.jsは、グローバルにJapanameObjectというオブジェクトを定義します。
